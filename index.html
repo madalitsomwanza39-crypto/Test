@@ -1,16 +1,759 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Havana | Good Food, Great Vibes</title>
+
     <style>
-        /* design goes here */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f8f9fb;
+            color: #102a43;
+            line-height: 1.6;
+        }
+
+        /* NAVBAR */
+        nav {
+            background: #071b2d;
+            color: white;
+            padding: 18px 7%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 3px 15px rgba(0,0,0,0.2);
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: 900;
+            letter-spacing: 2px;
+            color: white;
+        }
+
+        .logo span {
+            color: #ff2638;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 28px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        nav a:hover {
+            color: #ff2638;
+        }
+
+        .nav-button {
+            background: #ff2638;
+            padding: 10px 18px;
+            border-radius: 25px;
+        }
+
+        .nav-button:hover {
+            color: white;
+            background: #d9192b;
+        }
+
+        /* HERO */
+        .hero {
+            min-height: 600px;
+            background:
+                linear-gradient(90deg, rgba(3,18,32,0.95), rgba(3,18,32,0.65), rgba(3,18,32,0.25)),
+                linear-gradient(135deg, #071b2d, #123e63);
+            color: white;
+            display: flex;
+            align-items: center;
+            padding: 80px 7%;
+        }
+
+        .hero-content {
+            max-width: 650px;
+        }
+
+        .hero small {
+            color: #ff2638;
+            font-weight: bold;
+            letter-spacing: 4px;
+            font-size: 15px;
+        }
+
+        .hero h1 {
+            font-size: clamp(60px, 10vw, 110px);
+            line-height: 0.95;
+            margin: 20px 0;
+            letter-spacing: -4px;
+        }
+
+        .hero h1 span {
+            color: #ff2638;
+        }
+
+        .hero h2 {
+            font-size: 25px;
+            margin-bottom: 15px;
+        }
+
+        .hero p {
+            max-width: 550px;
+            color: #d8e4ef;
+            font-size: 18px;
+            margin-bottom: 30px;
+        }
+
+        .button {
+            display: inline-block;
+            background: #ff2638;
+            color: white;
+            text-decoration: none;
+            padding: 14px 25px;
+            border-radius: 30px;
+            font-weight: bold;
+            margin-right: 10px;
+            transition: 0.3s;
+        }
+
+        .button:hover {
+            background: #d9192b;
+            transform: translateY(-2px);
+        }
+
+        .button.secondary {
+            background: transparent;
+            border: 2px solid white;
+        }
+
+        .button.secondary:hover {
+            background: white;
+            color: #071b2d;
+        }
+
+        /* FEATURES */
+        .features {
+            background: #071b2d;
+            color: white;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            padding: 35px 7%;
+            gap: 20px;
+        }
+
+        .feature {
+            text-align: center;
+            padding: 15px;
+        }
+
+        .feature-icon {
+            font-size: 32px;
+            margin-bottom: 8px;
+        }
+
+        .feature h3 {
+            margin-bottom: 5px;
+        }
+
+        .feature p {
+            color: #b9c9d8;
+            font-size: 14px;
+        }
+
+        /* GENERAL SECTION */
+        section {
+            padding: 80px 7%;
+        }
+
+        .section-heading {
+            text-align: center;
+            margin-bottom: 45px;
+        }
+
+        .section-heading small {
+            color: #ff2638;
+            font-weight: bold;
+            letter-spacing: 4px;
+        }
+
+        .section-heading h2 {
+            font-size: 42px;
+            margin-top: 5px;
+            color: #102a43;
+        }
+
+        .section-heading p {
+            color: #657786;
+            margin-top: 10px;
+        }
+
+        /* MENU */
+        .menu {
+            background: white;
+        }
+
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+        }
+
+        .food-card {
+            background: #f8f9fb;
+            border-radius: 15px;
+            overflow: hidden;
+            border: 1px solid #e3e8ed;
+            transition: 0.3s;
+        }
+
+        .food-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 12px 30px rgba(0,0,0,0.1);
+        }
+
+        .food-image {
+            height: 180px;
+            background: linear-gradient(135deg, #102a43, #1769aa);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 55px;
+        }
+
+        .food-info {
+            padding: 22px;
+        }
+
+        .food-info h3 {
+            color: #102a43;
+            margin-bottom: 8px;
+        }
+
+        .food-info p {
+            color: #657786;
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+
+        .price {
+            color: #ff2638;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        /* ABOUT */
+        .about {
+            background: #071b2d;
+            color: white;
+        }
+
+        .about-container {
+            max-width: 1100px;
+            margin: auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .about-box {
+            height: 350px;
+            border-radius: 20px;
+            background:
+                linear-gradient(135deg, rgba(255,38,56,0.8), rgba(23,105,170,0.8)),
+                #123e63;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 90px;
+        }
+
+        .about small {
+            color: #ff2638;
+            font-weight: bold;
+            letter-spacing: 4px;
+        }
+
+        .about h2 {
+            font-size: 42px;
+            margin: 10px 0 20px;
+        }
+
+        .about p {
+            color: #c5d2df;
+            margin-bottom: 20px;
+        }
+
+        /* CONTACT */
+        .contact {
+            background: white;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+            max-width: 1000px;
+            margin: auto;
+        }
+
+        .contact-card {
+            text-align: center;
+            padding: 30px 20px;
+            border-radius: 15px;
+            background: #f8f9fb;
+            border: 1px solid #e3e8ed;
+        }
+
+        .contact-card .icon {
+            font-size: 35px;
+            margin-bottom: 12px;
+        }
+
+        .contact-card h3 {
+            margin-bottom: 8px;
+        }
+
+        .contact-card p {
+            color: #657786;
+        }
+
+        /* FOOTER */
+        footer {
+            background: #071b2d;
+            color: white;
+            text-align: center;
+            padding: 35px 7%;
+        }
+
+        footer .footer-logo {
+            font-size: 28px;
+            font-weight: 900;
+            letter-spacing: 2px;
+        }
+
+        footer .footer-logo span {
+            color: #ff2638;
+        }
+
+        footer p {
+            color: #aebdca;
+            margin-top: 10px;
+            font-size: 14px;
+        }
+
+        /* MOBILE */
+        @media (max-width: 800px) {
+
+            nav {
+                padding: 15px 5%;
+            }
+
+            nav ul {
+                display: none;
+            }
+
+            .hero {
+                min-height: 520px;
+                padding: 70px 6%;
+            }
+
+            .hero h1 {
+                font-size: 70px;
+            }
+
+            .features {
+                grid-template-columns: repeat(2, 1fr);
+                padding: 25px 5%;
+            }
+
+            section {
+                padding: 60px 5%;
+            }
+
+            .menu-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .about-container {
+                grid-template-columns: 1fr;
+                gap: 35px;
+            }
+
+            .about-box {
+                height: 250px;
+            }
+
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+
+            .hero h1 {
+                font-size: 55px;
+            }
+
+            .hero h2 {
+                font-size: 20px;
+            }
+
+            .hero p {
+                font-size: 16px;
+            }
+
+            .features {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .section-heading h2,
+            .about h2 {
+                font-size: 32px;
+            }
+
+            .button {
+                margin-bottom: 10px;
+            }
+        }
     </style>
 </head>
 
 <body>
-    <!-- website goes here -->
 
-    <script>
-        // interactions go here
-    </script>
+    <!-- NAVIGATION -->
+    <nav>
+        <div class="logo">HA<span>VA</span>NA</div>
+
+        <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#menu">Menu</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+
+        <a class="nav-button" href="https://wa.me/123456789">
+            WhatsApp
+        </a>
+    </nav>
+
+
+    <!-- HERO -->
+    <section class="hero" id="home">
+
+        <div class="hero-content">
+
+            <small>WELCOME TO</small>
+
+            <h1>HA<span>VA</span>NA</h1>
+
+            <h2>Good Food • Great Vibes • Always</h2>
+
+            <p>
+                Delicious food, refreshing drinks and a welcoming atmosphere.
+                Havana brings great meals and good moments together under one roof.
+            </p>
+
+            <a href="#menu" class="button">
+                View Our Menu
+            </a>
+
+            <a href="#contact" class="button secondary">
+                Find Us
+            </a>
+
+        </div>
+
+    </section>
+
+
+    <!-- FEATURES -->
+    <div class="features">
+
+        <div class="feature">
+            <div class="feature-icon">🍴</div>
+            <h3>Fresh Food</h3>
+            <p>Quality ingredients in every meal.</p>
+        </div>
+
+        <div class="feature">
+            <div class="feature-icon">👨‍🍳</div>
+            <h3>Skilled Chefs</h3>
+            <p>Meals prepared with care.</p>
+        </div>
+
+        <div class="feature">
+            <div class="feature-icon">✨</div>
+            <h3>Great Atmosphere</h3>
+            <p>A place to relax and enjoy.</p>
+        </div>
+
+        <div class="feature">
+            <div class="feature-icon">💰</div>
+            <h3>Great Value</h3>
+            <p>Good food at fair prices.</p>
+        </div>
+
+    </div>
+
+
+    <!-- MENU -->
+    <section class="menu" id="menu">
+
+        <div class="section-heading">
+
+            <small>OUR MENU</small>
+
+            <h2>Popular Dishes</h2>
+
+            <p>
+                A few customer favourites from Havana.
+            </p>
+
+        </div>
+
+
+        <div class="menu-grid">
+
+            <div class="food-card">
+                <div class="food-image">🍗</div>
+
+                <div class="food-info">
+                    <h3>Grilled Chicken</h3>
+
+                    <p>
+                        Juicy grilled chicken served with seasoned fries
+                        and a fresh side salad.
+                    </p>
+
+                    <div class="price">K65</div>
+                </div>
+            </div>
+
+
+            <div class="food-card">
+                <div class="food-image">🍔</div>
+
+                <div class="food-info">
+                    <h3>Havana Beef Burger</h3>
+
+                    <p>
+                        A classic beef burger with fresh vegetables,
+                        cheese and our signature sauce.
+                    </p>
+
+                    <div class="price">K55</div>
+                </div>
+            </div>
+
+
+            <div class="food-card">
+                <div class="food-image">🍝</div>
+
+                <div class="food-info">
+                    <h3>Creamy Pasta</h3>
+
+                    <p>
+                        Rich creamy pasta prepared with herbs,
+                        vegetables and your choice of protein.
+                    </p>
+
+                    <div class="price">K50</div>
+                </div>
+            </div>
+
+
+            <div class="food-card">
+                <div class="food-image">🍕</div>
+
+                <div class="food-info">
+                    <h3>Classic Pizza</h3>
+
+                    <p>
+                        Freshly baked pizza topped with cheese,
+                        tomato and your favourite toppings.
+                    </p>
+
+                    <div class="price">K60</div>
+                </div>
+            </div>
+
+
+            <div class="food-card">
+                <div class="food-image">🥩</div>
+
+                <div class="food-info">
+                    <h3>BBQ Ribs</h3>
+
+                    <p>
+                        Tender ribs coated in Havana's signature
+                        barbecue sauce.
+                    </p>
+
+                    <div class="price">K70</div>
+                </div>
+            </div>
+
+
+            <div class="food-card">
+                <div class="food-image">🥤</div>
+
+                <div class="food-info">
+                    <h3>Fresh Havana Juice</h3>
+
+                    <p>
+                        A refreshing fruit drink made fresh
+                        for every order.
+                    </p>
+
+                    <div class="price">K25</div>
+                </div>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ABOUT -->
+    <section class="about" id="about">
+
+        <div class="about-container">
+
+            <div class="about-box">
+                🌴
+            </div>
+
+            <div>
+
+                <small>ABOUT HAVANA</small>
+
+                <h2>The Havana Experience</h2>
+
+                <p>
+                    Havana is a place for great food, good company and
+                    memorable moments. From quick lunches to relaxed dinners,
+                    our menu has something for everyone.
+                </p>
+
+                <p>
+                    Located at Pinnacle Mall, we're here to serve fresh,
+                    satisfying meals in a comfortable atmosphere.
+                </p>
+
+                <a href="#contact" class="button">
+                    Visit Havana
+                </a>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- CONTACT -->
+    <section class="contact" id="contact">
+
+        <div class="section-heading">
+
+            <small>COME VISIT US</small>
+
+            <h2>Find Havana</h2>
+
+            <p>
+                We'd love to have you.
+            </p>
+
+        </div>
+
+
+        <div class="contact-grid">
+
+            <div class="contact-card">
+
+                <div class="icon">📱</div>
+
+                <h3>WhatsApp / Call</h3>
+
+                <p>123456789</p>
+
+                <br>
+
+                <a
+                    href="https://wa.me/123456789"
+                    class="button"
+                >
+                    Message Us
+                </a>
+
+            </div>
+
+
+            <div class="contact-card">
+
+                <div class="icon">📍</div>
+
+                <h3>Our Location</h3>
+
+                <p>
+                    Pinnacle Mall
+                </p>
+
+            </div>
+
+
+            <div class="contact-card">
+
+                <div class="icon">🕐</div>
+
+                <h3>Opening Hours</h3>
+
+                <p>
+                    Daily<br>
+                    07:00 AM onwards
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- FOOTER -->
+    <footer>
+
+        <div class="footer-logo">
+            HA<span>VA</span>NA
+        </div>
+
+        <p>
+            Good Food • Great Vibes • Always
+        </p>
+
+        <p>
+            © 2026 Havana. All rights reserved.
+        </p>
+
+    </footer>
+
 </body>
-</html>
+                                            </html>
